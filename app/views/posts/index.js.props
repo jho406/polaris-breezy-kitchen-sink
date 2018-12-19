@@ -1,0 +1,15 @@
+json.flash flash.to_h
+
+json.posts do
+  json.array! @posts do |post|
+    json.id post.id
+    json.body post.body
+    json.created_at post.created_at
+    json.updated_at post.updated_at
+    json.edit_post_path edit_post_path(post)
+    json.post_path post_path(post)
+  end
+end
+
+
+json.new_post_path new_post_path
