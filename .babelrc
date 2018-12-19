@@ -5,7 +5,7 @@
       {
         "modules": false,
         "targets": {
-          "browsers": "> 1%",
+          "browsers": "chrome >= 69",
           "uglify": true
         },
         "useBuiltIns": true
@@ -31,7 +31,7 @@
         "alias": {
           "views": "./app/views",
           "components": "./app/components",
-          "javascripts": "./app/javascripts"
+          "javascript": "./app/javascript"
         }
       }
     ]
