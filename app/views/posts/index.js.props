@@ -1,15 +1,31 @@
-json.flash flash.to_h
-
-json.posts do
-  json.array! @posts do |post|
-    json.id post.id
-    json.body post.body
-    json.created_at post.created_at
-    json.updated_at post.updated_at
-    json.edit_post_path edit_post_path(post)
-    json.post_path post_path(post)
+if flash.any?
+  json.toast do
+    json.error flash.key?(:error)
+    json.content flash[:notice]
   end
 end
 
+json.layout nil, partial: 'layout'
 
-json.new_post_path new_post_path
+json.title 'Account'
+
+posts = @posts
+json.posts do
+  json.resource_name({
+    singular: 'post',
+    plural: 'posts'
+  })
+
+  json.items do
+    json.array! posts do |post|
+      json.id post.id
+      json.title 'Mae Jemison'
+      json.location 'Decantur, USA'
+      json.body post.body
+      json.created_at post.created_at
+      json.updated_at post.updated_at
+      json.edit_post_path edit_post_path(post)
+      json.post_path post_path(post)
+    end
+  end
+end

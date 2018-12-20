@@ -1,0 +1,6 @@
+json.array! [
+  {
+    label: 'Help center',
+    icon: 'help'
+  }
+]

@@ -1,0 +1,9 @@
+json.array! [
+  {
+    items: [{content: 'Back to Shopify', icon: 'arrowLeft'}],
+  },
+  {
+    items: [{content: 'Community forums'}],
+  }
+]
+

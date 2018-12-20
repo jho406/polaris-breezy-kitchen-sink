@@ -9,9 +9,9 @@ class PostsController < ApplicationController
     @posts = Post.all
   end
 
-  # GET /posts/1
-  def show
-  end
+  # # GET /posts/1
+  # def show
+  # end
 
   # GET /posts/new
   def new
@@ -37,7 +37,8 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1
   def update
     if @post.update(post_params)
-      redirect_to @post, notice: 'Post was successfully updated.'
+      flash[:success] = 'Saved!'
+      redirect_to edit_post_path(@post), notice: 'Post was successfully updated.'
     else
       response.set_header("content-location", edit_post_path(@post))
       render :edit

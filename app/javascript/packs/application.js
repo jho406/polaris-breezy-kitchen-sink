@@ -6,19 +6,18 @@ import {render} from 'react-dom'
 import createHistory from 'history/createBrowserHistory'
 import Breezy from '@jho406/breezy'
 import PostsEdit from 'views/posts/edit'
-import PostsNew from 'views/posts/new'
-import PostsShow from 'views/posts/show'
 import PostsIndex from 'views/posts/index'
 import Nav from '@jho406/breezy/dist/NavComponent'
 
 import reduceReducers from 'reduce-reducers'
 import applicationReducer from './reducers'
+
+import '@shopify/polaris/styles.css'
+
 // Mapping between your props template to Component
 // e.g {'posts/new': PostNew}
 const screenToComponentMapping = {
   'posts/edit': PostsEdit,
-  'posts/new': PostsNew,
-  'posts/show': PostsShow,
   'posts/index': PostsIndex,
 }
 
