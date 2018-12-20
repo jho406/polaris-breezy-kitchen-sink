@@ -44,6 +44,8 @@ class PostsIndex extends BaseScreen {
   renderResourceList(posts) {
     return (
       <ResourcePostList {...posts}
+        onPrevious={this.handleClick}
+        onNext={this.handleClick}
         renderItem={(item) => {
           const isEmpty = Object.keys(item).length == 0
 

@@ -2,15 +2,17 @@ import React from 'react'
 import {mapStateToProps, mapDispatchToProps} from '@jho406/breezy'
 import { connect } from 'react-redux'
 import BaseScreen from 'components/BaseScreen'
-import { Card, CalloutCard, EmptyState, Layout, Loading, ResourceList, Avatar, TextStyle, Page, SkeletonPage, SkeletonBodyText, TextContainer, SkeletonDisplayText} from '@shopify/polaris'
+import { Card, CalloutCard, EmptyState, Layout, Loading, Pagination, ResourceList, Avatar, TextStyle, Page, SkeletonPage, SkeletonBodyText, TextContainer, SkeletonDisplayText} from '@shopify/polaris'
 import PostsForm from 'components/PostsForm'
 import LayoutForForms from 'components/LayoutForForms'
+import ListFooter from 'components/ListFooter'
 
 class ResourcePostList extends React.Component {
   render () {
     const {
       resourceName,
       items,
+      pagination,
       heading,
       renderItem,
       onPrevious,
@@ -41,7 +43,21 @@ class ResourcePostList extends React.Component {
     )
 
     const actualList = items.length == 0 ? emptyResourceList : resourceList
-    return actualList
+
+    const paginationMarkup =
+      pagination ? (
+        <ListFooter>
+          <Pagination {...pagination}
+            onPrevious={onPrevious(pagination.pathToPrevPage)}
+            onNext={onNext(pagination.pathToNextPage)}
+          />
+        </ListFooter>
+      ) : null
+
+    return [
+      actualList,
+      paginationMarkup
+    ]
   }
 }
 
