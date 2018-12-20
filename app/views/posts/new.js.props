@@ -1,4 +1,0 @@
-json.flash flash.to_h
-json.errors @post.errors.to_h
-
-json.posts_path posts_path
