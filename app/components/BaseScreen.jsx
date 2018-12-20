@@ -15,5 +15,14 @@ export default class extends React.Component {
       this.setState((prevState) => ({[key]: !prevState[key]}));
     }
   }
+
+  turboVisit = (pageKey) => {
+    if(this.props.navigateTo(pageKey)) {
+      // do nothing and let navigateTo just load and transition
+    } else {
+      // can't navigate due to missing cache, attempt to visit instead
+      this.visit(pageKey)
+    }
+  }
 }
 

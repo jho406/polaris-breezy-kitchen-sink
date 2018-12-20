@@ -13,7 +13,7 @@ import parse from 'url-parse'
 
 class PostsIndex extends BaseScreen {
   handleClick = (url) => () => {
-    this.visit(url)
+    this.turboVisit(url)
   }
 
   renderCallout ({body='loading...'} = {}) {
