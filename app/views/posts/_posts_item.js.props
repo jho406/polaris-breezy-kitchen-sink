@@ -1,0 +1,9 @@
+json.id post.id
+json.title 'Mae Jemison'
+json.location 'Decantur, USA'
+json.body post.body
+json.created_at post.created_at
+json.updated_at post.updated_at
+json.edit_post_path edit_post_path(post)
+json.post_path post_path(post)
+

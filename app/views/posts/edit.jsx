@@ -24,6 +24,7 @@ class PostsEdit extends BaseScreen {
 
   handleSubmit = (id) => (values, {setSubmitting}) => {
     this.props.clearSubmissionErrors(this.props.pageKey)
+    this.props.updateAllPostFragments(id, values.body)
 
     this.setState({
       isDirty: false,
