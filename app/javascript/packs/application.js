@@ -1,8 +1,8 @@
 import React from 'react'
 import {combineReducers, createStore, applyMiddleware, compose} from 'redux'
 import thunk from 'redux-thunk'
-import { Provider } from 'react-redux'
-import { render } from 'react-dom'
+import {Provider} from 'react-redux'
+import {render} from 'react-dom'
 import createHistory from 'history/createBrowserHistory'
 import Breezy from '@jho406/breezy'
 import PostsEdit from 'views/posts/edit'
@@ -11,6 +11,8 @@ import PostsShow from 'views/posts/show'
 import PostsIndex from 'views/posts/index'
 import Nav from '@jho406/breezy/dist/NavComponent'
 
+import reduceReducers from 'reduce-reducers'
+import applicationReducer from './reducers'
 // Mapping between your props template to Component
 // e.g {'posts/new': PostNew}
 const screenToComponentMapping = {
@@ -34,10 +36,15 @@ const {reducer, initialState, initialPageKey, connect} = Breezy.start({
 })
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+const {
+  breezy: breezyReducer,
+  pages: pagesReducer,
+} = reducer
 
 const store = createStore(
   combineReducers({
-    ...reducer,
+    breezy: breezyReducer,
+    pages: reduceReducers(pagesReducer, applicationReducer),
   }),
   initialState,
   composeEnhancers(applyMiddleware(thunk))
