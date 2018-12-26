@@ -1,11 +1,20 @@
-json.flash flash.to_h
-json.errors @post.errors.to_h
+if flash.any?
+  json.toast do
+    json.error flash.key?(:error)
+    json.content flash[:notice]
+  end
+end
+
+json.layout nil, partial: 'layout'
+
+json.title 'Account'
+json.new_post_path new_post_path
+
+if @post.errors.any?
+  json.errors @post.errors.to_h
+end
 
 json.id @post.id
-json.body @post.body
-json.created_at @post.created_at
-json.updated_at @post.updated_at
-
 
 json.attributes_for_form do
   json.body @post.body

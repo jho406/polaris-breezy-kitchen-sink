@@ -38,7 +38,7 @@ class PostsController < ApplicationController
   def update
     if @post.update(post_params)
       flash[:success] = 'Saved!'
-      redirect_to edit_post_path(@post), notice: 'Post was successfully updated.'
+      redirect_to posts_path, notice: 'Post was successfully updated.'
     else
       response.set_header("content-location", edit_post_path(@post))
       render :edit
