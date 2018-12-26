@@ -9,6 +9,11 @@ json.layout nil, partial: 'layout'
 
 json.title 'Account'
 
+json.callout(defer: :auto) do
+  sleep 5
+  json.body "Finished! Time: #{Time.now.to_i}"
+end
+
 posts = @posts
 json.posts do
   json.resource_name({

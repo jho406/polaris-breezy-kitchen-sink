@@ -5,14 +5,40 @@ import {
 } from '@jho406/breezy'
 import { connect } from 'react-redux'
 import BaseScreen from 'components/BaseScreen'
-import { Card, EmptyState, Layout, Loading, ResourceList, Avatar, TextStyle, Toast, Page, SkeletonPage, SkeletonBodyText, TextContainer, SkeletonDisplayText} from '@shopify/polaris'
+import { Card, CalloutCard, EmptyState, Layout, Loading, ResourceList, Avatar, TextStyle, Toast, Page, SkeletonPage, SkeletonBodyText, TextContainer, SkeletonDisplayText} from '@shopify/polaris'
 import LayoutForForms from 'components/LayoutForForms'
 import ResourcePostList from 'components/ResourcePostList'
 import * as actionCreators from 'javascript/packs/action_creators'
+import parse from 'url-parse'
 
 class PostsIndex extends BaseScreen {
   handleClick = (url) => () => {
     this.visit(url)
+  }
+
+  renderCallout ({body='loading...'} = {}) {
+    return (
+      <CalloutCard
+          title="Slow loading Content"
+          illustration="https://cdn.shopify.com/s/assets/admin/checkout/settings-customizecart-705f57c725ac05be5a34ec20c05b94298cb8afd10aac7bd9c7ad02030f48cfa0.svg"
+          primaryAction={{
+            content: 'Click to reload fragment',
+            onAction: () => {
+              const pageKey = this.props.pageKey
+              const url = 'http://localhost:3000/posts?bzq=callout'
+
+              // let url = new parse(pageKey, true)
+              // url.query.bzq = `callout`
+
+              this.props.remote(url, {}, pageKey)
+            },
+          }}
+        >
+
+          <p> The below loads really slow</p>
+          <p> {body} </p>
+      </CalloutCard>
+    )
   }
 
   renderResourceList(posts) {
@@ -67,7 +93,8 @@ class PostsIndex extends BaseScreen {
       layout,
       toast,
       clearToast,
-      pageKey
+      pageKey,
+      callout
     } = this.props
 
     const resourceList = this.renderResourceList(posts)
@@ -82,6 +109,7 @@ class PostsIndex extends BaseScreen {
         <Page
           title={title}
         >
+          {this.renderCallout(callout)}
           <Card>
             {resourceList}
           </Card>
