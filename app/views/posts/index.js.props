@@ -14,7 +14,7 @@ json.callout(defer: :auto) do
   json.body "Finished! Time: #{Time.now.to_i}"
 end
 
-all_posts = Post.all
+all_posts = Post.order(updated_at: :desc)
 pending = Post.where(pending: true)
 
 json.posts do
@@ -42,3 +42,14 @@ json.posts do
       ]
   end
 end
+
+# create preloaded pages only on direct visit
+# clear this on componentDidMount
+if request.format.html?
+  last_updated_post = all_posts.first
+
+  json.preloaded_pages [
+    [edit_post_path(last_updated_post), @renderer.render(:edit, assigns: {post: last_updated_post})],
+  ]
+end
+

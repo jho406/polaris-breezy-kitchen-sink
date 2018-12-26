@@ -30,6 +30,15 @@ export default function (state = {}, action) {
       delete node['error']
     })
   }
+  case 'CLEAR_PRELOADED': {
+    const { pageKey } = action.payload
+    const keyPath = [pageKey, 'data'].join('.')
+
+    return produce(state, draft => {
+      const node = getIn(draft, keyPath)
+      delete node['preloadedPages']
+    })
+  }
   case 'CLEAR_TOAST': {
     const { pageKey } = action.payload
     const keyPath = [pageKey, 'data'].join('.')
@@ -43,3 +52,4 @@ export default function (state = {}, action) {
     return state
   }
 }
+

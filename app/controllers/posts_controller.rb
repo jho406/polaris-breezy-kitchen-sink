@@ -6,7 +6,7 @@ class PostsController < ApplicationController
 
   # GET /posts
   def index
-    @posts = Post.all
+    @renderer = self.class.renderer.new(request.env)
   end
 
   # # GET /posts/1

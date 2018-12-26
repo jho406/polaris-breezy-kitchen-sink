@@ -50,6 +50,27 @@ class PostsIndex extends BaseScreen {
     this.setState({activeTab: selectedTabIndex})
   }
 
+  preloadThenClear = () => {
+    const {
+      preloadedPages,
+      pageKey,
+      saveAndProcessSJRPage,
+      clearPreloaded
+    } = this.props
+
+    if (preloadedPages) {
+      preloadedPages.forEach(([preloadPageKey, renderedView])=>{
+        saveAndProcessSJRPage(preloadPageKey, renderedView)
+      })
+
+      clearPreloaded(pageKey)
+    }
+  }
+
+  componentDidMount() {
+    this.preloadThenClear()
+  }
+
   renderCallout ({body='loading...'} = {}) {
     return (
       <CalloutCard

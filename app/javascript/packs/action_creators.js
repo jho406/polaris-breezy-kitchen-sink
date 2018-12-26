@@ -25,3 +25,12 @@ export function clearToast(pageKey) {
     }
   }
 }
+
+export function clearPreloaded(pageKey) {
+  return {
+    type: 'CLEAR_PRELOADED',
+    payload: {
+      pageKey
+    }
+  }
+}
