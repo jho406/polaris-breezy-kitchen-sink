@@ -1,0 +1,21 @@
+json.resource_name({
+  singular: 'post',
+  plural: 'posts'
+})
+
+json.loading true
+json.is_fake true
+
+placeholders = [
+  {id: 1, loading: true},
+  {id: 2, loading: true},
+  {id: 3, loading: true},
+  {id: 4, loading: true}
+]
+
+json.items do
+  json.array! placeholders do |item|
+    json.id item[:id]
+    json.loading item[:loading]
+  end
+end

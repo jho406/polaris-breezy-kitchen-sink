@@ -36,6 +36,17 @@ class PostsIndex extends BaseScreen {
   }
 
   handleTabChange = (selectedTabIndex) => {
+    const {pageKey} = this.props
+    const tabs = ['all', 'pending']
+    const selectedKey = tabs[selectedTabIndex]
+    const activeTabContent = this.props.posts[selectedKey]
+
+    if (activeTabContent.isFake) {
+      let url = new parse(pageKey, true)
+      url.query.bzq = `posts.${tabs[selectedTabIndex]}`
+      this.props.remote(url.toString(), {}, pageKey)
+    }
+
     this.setState({activeTab: selectedTabIndex})
   }
 

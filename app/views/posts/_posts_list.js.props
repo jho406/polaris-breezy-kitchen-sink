@@ -1,6 +1,10 @@
 page_num = params[param_name]
 items_per_page = 10
 
+if sleep_for_demo
+  sleep 3
+end
+
 paged_posts = posts
   .page(page_num)
   .per(items_per_page)
@@ -30,6 +34,12 @@ if needs_pagination
   json.pagination do
     json.has_previous !paged_posts.first_page?
     json.has_next !paged_posts.last_page?
+
+    # Note that kaminari produces urls off of the original_url so if you're using
+    # node filtering, it creates some ugly urls that contain private params that
+    # Breezy uses. Just pass them through to Breezy's visit and remote functions
+    # as they will auto clean the urls.
+
     json.path_to_next_page path_to_next_page(paged_posts, param_name: param_name)
     json.path_to_prev_page path_to_prev_page(paged_posts, param_name: param_name)
   end

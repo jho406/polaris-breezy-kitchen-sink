@@ -22,15 +22,23 @@ json.posts do
     partial: ['posts/posts_list',
       locals: {
         posts: all_posts,
-        param_name: :page_num_for_all
+        param_name: :page_num_for_all,
+        sleep_for_demo: false
       }
     ]
 
-  json.pending nil,
-    partial: ['posts/posts_list',
-      locals: {
-        posts: pending,
-        param_name: :page_num_for_pending
-      }
-    ]
+  if request.format.html?
+    # The pending tab will initially be fake
+    json.pending nil, partial: 'fake_posts_list'
+  else
+    # Then a manual this.props.remote for the real thing
+    json.pending nil,
+      partial: ['posts/posts_list',
+        locals: {
+          posts: pending,
+          param_name: :page_num_for_pending,
+          sleep_for_demo: true
+        }
+      ]
+  end
 end
