@@ -22,12 +22,44 @@ export default class extends BaseScreen {
   }
 
   state = {
+    searchActive: false,
+    searchText: '',
     showMobileNavigation: false,
     userMenuOpen: false,
   }
 
+  performSearch = debounce((value) => {
+    const {pageKey} = this.props
+    let url = new parse(pageKey, true)
+    url.query.search = value
+    url.query.bzq = 'layout.top_nav.search_items'
+    this.props.remote(url.toString(), {}, pageKey)
+  }, 300)
+
+  handleSearchFieldChange = (value) => {
+    this.setState({searchText: value})
+    if (value.length > 0) {
+      this.setState({searchActive: true})
+    } else {
+      this.setState({searchActive: false})
+    }
+
+    this.performSearch(value)
+  }
+
+  handleSearchResultsDismiss = () => {
+    this.setState(() => {
+      return {
+        searchActive: false,
+        searchText: '',
+      }
+    })
+  }
+
   render() {
     const {
+      searchActive,
+      searchText,
       showMobileNavigation,
       userMenuOpen,
     } = this.state
@@ -45,9 +77,13 @@ export default class extends BaseScreen {
           topBar={
             <TopNav
               {...topNav}
+              searchText={searchText}
+              searchActive={searchActive}
               userMenuOpen={userMenuOpen}
               onUserMenuOpen={this.toggleState('userMenuOpen')}
               onNavigationToggle={this.toggleState('showMobileNavigation')}
+              onSearchResultsDismiss={this.handleSearchResultsDismiss}
+              onSearchFieldChange={this.handleSearchFieldChange}
             />
           }
           navigation={<LeftNav {...leftNav}/>}

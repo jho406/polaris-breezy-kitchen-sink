@@ -1,4 +1,5 @@
 json.top_nav do
+  json.search_items nil, partial: 'search_results'
   json.user_menu nil, partial: 'user_menu'
 end
 

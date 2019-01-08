@@ -1,0 +1,11 @@
+qry = params[:search]
+
+results = if qry
+  Post.basic_search(qry)
+else
+  []
+end
+
+json.array! results do |post|
+  json.content post.body
+end
