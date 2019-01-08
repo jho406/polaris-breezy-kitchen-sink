@@ -5,15 +5,38 @@ import {
 } from '@jho406/breezy'
 import { connect } from 'react-redux'
 import BaseScreen from 'components/BaseScreen'
-import { Card, CalloutCard, EmptyState, Layout, Loading, ResourceList, Avatar, TextStyle, Toast, Page, SkeletonPage, SkeletonBodyText, TextContainer, SkeletonDisplayText} from '@shopify/polaris'
+import { Tabs, Card, CalloutCard, EmptyState, Layout, Loading, ResourceList, Avatar, TextStyle, Toast, Page, SkeletonPage, SkeletonBodyText, TextContainer, SkeletonDisplayText} from '@shopify/polaris'
 import LayoutForForms from 'components/LayoutForForms'
 import ResourcePostList from 'components/ResourcePostList'
 import * as actionCreators from 'javascript/packs/action_creators'
 import parse from 'url-parse'
 
 class PostsIndex extends BaseScreen {
+  state = {
+    activeTab: 0
+  }
+
+  tabs = [
+    {
+      id: 'all-posts',
+      content: 'All',
+      accessibilityLabel: 'All posts',
+      panelID: 'all-posts-content',
+    },
+    {
+      id: 'pending-posts',
+      content: 'Pending',
+      accessibilityLabel: 'Pending posts',
+      panelID: 'pending-posts-content',
+    },
+  ]
+
   handleClick = (url) => () => {
     this.turboVisit(url)
+  }
+
+  handleTabChange = (selectedTabIndex) => {
+    this.setState({activeTab: selectedTabIndex})
   }
 
   renderCallout ({body='loading...'} = {}) {
@@ -99,7 +122,13 @@ class PostsIndex extends BaseScreen {
       callout
     } = this.props
 
-    const resourceList = this.renderResourceList(posts)
+    const {
+      activeTab
+    } = this.state
+
+    const tabsMarkup = <Tabs tabs={this.tabs} selected={activeTab} onSelect={this.handleTabChange} />
+    const postsTabContent = [posts.all, posts.pending]
+    const resourceList = this.renderResourceList(postsTabContent[activeTab])
     const toastMarkup = toast ? (
       <Toast
         {...toast}
@@ -113,6 +142,7 @@ class PostsIndex extends BaseScreen {
         >
           {this.renderCallout(callout)}
           <Card>
+            {tabsMarkup}
             {resourceList}
           </Card>
         {toastMarkup}
