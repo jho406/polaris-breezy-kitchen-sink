@@ -8,6 +8,10 @@ import Breezy from '@jho406/breezy'
 import PostsEdit from 'views/posts/edit'
 import PostsIndex from 'views/posts/index'
 import Nav from '@jho406/breezy/dist/NavComponent'
+import {
+  extractNodeAndPath,
+  parseSJR
+} from '@jho406/breezy/dist/utils/helpers'
 
 import reduceReducers from 'reduce-reducers'
 import applicationReducer from './reducers'
@@ -63,6 +67,17 @@ class App extends React.Component {
     </Provider>
   }
 }
+
+window.App.cable.subscriptions.create("WebNotificationsChannel", {
+  received: function({message}) {
+    const {node} =  extractNodeAndPath(parseSJR(message))
+    store.dispatch({
+      type: 'UPDATE_ALL_POST_FRAGMENTS',
+      payload: node
+    })
+  }
+})
+
 
 document.addEventListener('DOMContentLoaded', function () {
   render(<App mapping={screenToComponentMapping}/>, document.getElementById('app'))
