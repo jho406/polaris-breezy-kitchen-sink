@@ -61,6 +61,6 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem "webpacker", "~> 3.5"
-gem 'breezy', "0.12"
-# gem 'breezy_template', path: '../../breezy/breezy_template'
-# gem 'breezy', path: '../../breezy/breezy_rails'
+# gem 'breezy', "0.12"
+gem 'props_template', path: '../../breezy/props_template'
+gem 'breezy', path: '../../breezy/breezy_rails'
