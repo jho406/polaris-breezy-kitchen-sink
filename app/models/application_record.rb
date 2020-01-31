@@ -4,7 +4,7 @@ class ApplicationRecord < ActiveRecord::Base
   end
 
   def self.member_by(attr, value)
-    find_by(Hash[attr, val])
+    find_by(Hash[attr, value])
   end
 
   def self.member_key
