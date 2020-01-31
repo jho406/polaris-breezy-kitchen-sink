@@ -1,12 +1,17 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
-  # `use_breezy` enables breezy functionality
-  # on application.html.erb
-  before_action :use_breezy
 
   # GET /posts
   def index
     @renderer = self.class.renderer.new(request.env)
+
+    respond_to do |format|
+      format.html {
+        @initial_state = render_to_string(formats: [:json], layout: true)
+        render inline: '', layout: true
+      }
+      format.json { render layout: true }
+    end
   end
 
   # # GET /posts/1
@@ -16,10 +21,24 @@ class PostsController < ApplicationController
   # GET /posts/new
   def new
     @post = Post.new
+    respond_to do |format|
+      format.html {
+        @initial_state = render_to_string(formats: [:json], layout: true)
+        render inline: '', layout: true
+      }
+      format.json { render layout: true }
+    end
   end
 
   # GET /posts/1/edit
   def edit
+    respond_to do |format|
+      format.html {
+        @initial_state = render_to_string(formats: [:json], layout: true)
+        render inline: '', layout: true
+      }
+      format.json { render layout: true }
+    end
   end
 
   # POST /posts

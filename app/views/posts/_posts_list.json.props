@@ -16,12 +16,13 @@ json.resource_name({
 })
 
 json.items do
-  json.array! paged_posts,
-    key: :id,
+  opts = {
     partial: ['posts/posts_item',
       fragment_name: -> item {"post_#{item.id}"},
       as: 'post'
     ]
+  }
+  json.array!(paged_posts, opts) {}
 end
 
 needs_pagination = posts.count > items_per_page

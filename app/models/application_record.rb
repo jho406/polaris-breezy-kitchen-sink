@@ -7,5 +7,9 @@ class ApplicationRecord < ActiveRecord::Base
     find_by(Hash[attr, val])
   end
 
+  def self.member_key
+    "id"
+  end
+
   self.abstract_class = true
 end

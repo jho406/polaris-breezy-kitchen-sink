@@ -1,14 +1,14 @@
 json.top_nav do
-  json.search_items nil, partial: 'search_results'
-  json.user_menu nil, partial: 'user_menu'
+  json.search_items(partial: 'search_results') {}
+  json.user_menu(partial: 'user_menu') {}
 end
 
 json.left_nav do
   json.name "Dharma"
-  json.avatarInitials "D"
+  json.avatar_initials "D"
   json.store_name 'blah'
-  json.user_menu nil, partial: 'user_menu'
-  json.settings_menu nil, partial: 'settings_menu'
+  json.user_menu(partial: 'user_menu') {}
+  json.settings_menu(partial: 'settings_menu') {}
 end
 
 json.theme({

@@ -1,0 +1,11 @@
+settings = [
+  {
+    label: 'Posts',
+    icon: 'home'
+  }
+]
+
+json.array! settings do |item|
+  json.label item[:label]
+  json.icon item[:label]
+end

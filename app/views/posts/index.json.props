@@ -5,7 +5,7 @@ if flash.any?
   end
 end
 
-json.layout nil, partial: 'layout'
+json.layout(partial: 'layout') {}
 
 json.title 'Account'
 
@@ -18,7 +18,7 @@ all_posts = Post.order(updated_at: :desc)
 pending = Post.where(pending: true)
 
 json.posts do
-  json.all nil,
+  opts = {
     partial: ['posts/posts_list',
       locals: {
         posts: all_posts,
@@ -26,13 +26,16 @@ json.posts do
         sleep_for_demo: false
       }
     ]
+  }
+
+  json.all(opts) {}
 
   if request.format.html?
     # The pending tab will initially be fake
-    json.pending nil, partial: 'fake_posts_list'
+    json.pending(partial: 'fake_posts_list') {}
   else
     # Then a manual this.props.remote for the real thing
-    json.pending nil,
+    opts = {
       partial: ['posts/posts_list',
         locals: {
           posts: pending,
@@ -40,16 +43,19 @@ json.posts do
           sleep_for_demo: true
         }
       ]
+    }
+
+    json.pending(opts) {}
   end
 end
 
 # create preloaded pages only on direct visit
 # clear this on componentDidMount
-if request.format.html?
-  last_updated_post = all_posts.first
+# if request.format.html?
+#  last_updated_post = all_posts.first
 
-  json.preloaded_pages [
-    [edit_post_path(last_updated_post), @renderer.render(:edit, assigns: {post: last_updated_post})],
-  ]
-end
+#  json.preloaded_pages [
+#    [edit_post_path(last_updated_post), @renderer.render(:edit, assigns: {post: last_updated_post})],
+#  ]
+#end
 

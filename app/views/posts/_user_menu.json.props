@@ -1,4 +1,4 @@
-json.array! [
+menu = [
   {
     items: [{content: 'Back to Shopify', icon: 'arrowLeft'}],
   },
@@ -7,3 +7,6 @@ json.array! [
   }
 ]
 
+json.array!(menu) do |items|
+  json.items items
+end

@@ -8,10 +8,10 @@ import Breezy from '@jho406/breezy'
 import PostsEdit from 'views/posts/edit'
 import PostsIndex from 'views/posts/index'
 import Nav from '@jho406/breezy/dist/NavComponent'
-import {
-  extractNodeAndPath,
-  parseSJR
-} from '@jho406/breezy/dist/utils/helpers'
+// import {
+//   extractNodeAndPath,
+//   parseSJR
+// } from '@jho406/breezy/dist/utils/helpers'
 
 import reduceReducers from 'reduce-reducers'
 import applicationReducer from './reducers'
@@ -20,7 +20,7 @@ import '@shopify/polaris/styles.css'
 
 // Mapping between your props template to Component
 // e.g {'posts/new': PostNew}
-const screenToComponentMapping = {
+const identifierToComponentMapping = {
   'posts/edit': PostsEdit,
   'posts/index': PostsIndex,
 }
@@ -68,17 +68,17 @@ class App extends React.Component {
   }
 }
 
-window.App.cable.subscriptions.create("WebNotificationsChannel", {
-  received: function({message}) {
-    const {node} =  extractNodeAndPath(parseSJR(message))
-    store.dispatch({
-      type: 'UPDATE_ALL_POST_FRAGMENTS',
-      payload: node
-    })
-  }
-})
+// window.App.cable.subscriptions.create("WebNotificationsChannel", {
+//   received: function({message}) {
+//     const {node} =  extractNodeAndPath(parseSJR(message))
+//     store.dispatch({
+//       type: 'UPDATE_ALL_POST_FRAGMENTS',
+//       payload: node
+//     })
+//   }
+// })
 
 
 document.addEventListener('DOMContentLoaded', function () {
-  render(<App mapping={screenToComponentMapping}/>, document.getElementById('app'))
+  render(<App mapping={identifierToComponentMapping}/>, document.getElementById('app'))
 })
