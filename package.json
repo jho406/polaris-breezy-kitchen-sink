@@ -2,7 +2,7 @@
   "name": "kitchen_sink",
   "private": true,
   "dependencies": {
-    "@jho406/breezy": "link:../breezy/breezy",
+    "@jho406/breezy": "file:../breezy/breezy",
     "@rails/webpacker": "3.5",
     "@shopify/polaris": "^3.21.1",
     "babel-plugin-module-resolver": "^3.2.0",

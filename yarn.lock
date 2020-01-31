@@ -8,9 +8,12 @@
   dependencies:
     regenerator-runtime "^0.13.2"
 
-"@jho406/breezy@link:../breezy/breezy":
-  version "0.0.0"
-  uid ""
+"@jho406/breezy@file:../breezy/breezy":
+  version "0.12.0"
+  dependencies:
+    cross-fetch "^2.2.2"
+    url-parse "^1.4.0"
+    uuid "^3.1.0"
 
 "@rails/webpacker@3.5":
   version "3.5.5"

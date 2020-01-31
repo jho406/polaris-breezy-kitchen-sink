@@ -1,4 +1,4 @@
-path = param_to_search_path(params[:_bzq])
+path = param_to_search_path(params[:bzq])
 
 json.data(search: path) do
   yield json

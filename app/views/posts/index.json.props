@@ -40,7 +40,7 @@ json.posts do
         locals: {
           posts: pending,
           param_name: :page_num_for_pending,
-          sleep_for_demo: true
+          sleep_for_demo: false
         }
       ]
     }
