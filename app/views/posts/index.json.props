@@ -9,9 +9,7 @@ json.layout(partial: 'layout') {}
 
 json.title 'Account'
 
-json.callout(defer: :auto) do
-  sleep 5
-  json.body "Finished! Time: #{Time.now.to_i}"
+json.callout(defer: :auto, partial: ['callout', fragment_name: 'callout']) do
 end
 
 all_posts = Post.order(updated_at: :desc)
