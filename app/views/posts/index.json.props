@@ -9,7 +9,7 @@ json.layout(partial: 'layout') {}
 
 json.title 'Account'
 
-json.callout(defer: :auto, partial: ['callout', fragment_name: 'callout']) do
+json.callout(defer: :auto, partial: ['callout', fragment: true]) do
 end
 
 all_posts = Post.order(updated_at: :desc)
