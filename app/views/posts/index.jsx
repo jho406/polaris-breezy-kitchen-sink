@@ -43,7 +43,7 @@ class PostsIndex extends BaseScreen {
 
     if (activeTabContent.isFake) {
       let url = new parse(pageKey, true)
-      url.query.bzq = `posts.${tabs[selectedTabIndex]}`
+      url.query.bzq = `data.posts.${tabs[selectedTabIndex]}`
       this.props.remote(url.toString(), {}, pageKey)
     }
 
