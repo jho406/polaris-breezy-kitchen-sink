@@ -9,7 +9,7 @@
     "babel-preset-react": "^6.24.1",
     "formik": "^1.5.8",
     "history": "^4.10.1",
-    "immer": "^1.12.1",
+    "immer": "^8.0.1",
     "lodash": "^4.17.15",
     "node-pre-gyp": "^0.13.0",
     "prop-types": "^15.7.2",
